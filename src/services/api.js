@@ -4,7 +4,7 @@ const mockMessages = [
     message: 'Hi Vladimir',
   },
   {
-    incoming: true,
+    incoming: false,
     message: 'Hi Mark',
   },
   {
@@ -12,7 +12,7 @@ const mockMessages = [
     message: 'Any Luck with the program?',
   },
   {
-    incoming: true,
+    incoming: false,
     message: 'No bro',
   },
   {
@@ -20,7 +20,7 @@ const mockMessages = [
     message: 'Aw I guess you will keep trying',
   },
   {
-    incoming: true,
+    incoming: false,
     message: 'Yeah! I guess.',
   },
   // rest of messages in the same format.

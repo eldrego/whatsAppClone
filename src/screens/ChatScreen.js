@@ -29,17 +29,30 @@ export default class Home extends Component {
     });
   }
 
+  getMessageRow(item) {
+    return (
+      <View style={[
+        styles.listItem, item.incoming ?
+        styles.incomingMessage :
+        styles.outgoingMessage,
+      ]}
+      >
+        <Text>{item.message}</Text>
+      </View>
+    );
+  }
+
   render() {
     return (
       <ImageBackground
-        style={styles.container}
+        style={styles.chatContainer}
         source={require('../images/bg.png')}
       >
         <View>
           <FlatList
             data={this.state.messages}
             renderItem={({ item }) =>
-              <View><Text>{item.message}</Text></View>
+              this.getMessageRow(item)
             }
             keyExtractor={(item, index) => (`message-${index}`)}
           />
