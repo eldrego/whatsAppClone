@@ -4,7 +4,12 @@ import {
   Text,
   ImageBackground,
   FlatList,
+  Platform,
 } from 'react-native';
+import {
+  KeyboardAwareScrollView,
+} from 'react-native-keyboard-aware-scroll-view';
+import Compose from '../components/Compose';
 import api from '../services/api';
 import styles from '../lib/css/styles';
 
@@ -19,14 +24,20 @@ export default class Home extends Component {
     this.state = {
       messages: [],
     };
+
+    this.keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0;
   }
 
   componentDidMount() {
-    api.getMockData().then((messages) => {
+    this.unsubscribeGetMessage = api.getMessages((snapshot) => {
       this.setState({
-        messages,
+        messages: Object.values(snapshot.val()),
       });
     });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeGetMessage();
   }
 
   getMessageRow(item) {
@@ -48,15 +59,21 @@ export default class Home extends Component {
         style={styles.chatContainer}
         source={require('../images/bg.png')}
       >
-        <View>
-          <FlatList
-            data={this.state.messages}
-            renderItem={({ item }) =>
-              this.getMessageRow(item)
-            }
-            keyExtractor={(item, index) => (`message-${index}`)}
-          />
-        </View>
+        <KeyboardAwareScrollView
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={false}
+        >
+          <View>
+            <FlatList
+              data={this.state.messages}
+              renderItem={({ item }) =>
+                this.getMessageRow(item)
+              }
+              keyExtractor={(item, index) => (`message-${index}`)}
+            />
+          </View>
+          <Compose submit={api.postMessage} />
+        </KeyboardAwareScrollView>
       </ImageBackground>
     );
   }
