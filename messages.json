@@ -1,0 +1,36 @@
+{
+  "message": [
+    {
+      "incoming": true,
+      "message": "Hi Vladimir"
+    },
+    {
+      "incoming": false,
+      "message": "Hi Mark"
+    },
+    {
+      "incoming": true,
+      "message": "Any Luck with the program?"
+    },
+    {
+      "incoming": false,
+      "message": "No bro"
+    },
+    {
+      "incoming": true,
+      "message": "Aw I guess you will keep trying"
+    },
+    {
+      "incoming": false,
+      "message": "Yeah! I guess."
+    },
+    {
+      "incoming": true,
+      "message": "When we will learn real data fetching"
+     },
+    {
+      "incoming": false,
+      "message": "First we need to learn debugging and testing, then we will learn styling and animations and then we will learn real data fetching. Let's use mock data for now ok?"
+    }
+  ]
+}
